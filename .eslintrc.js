@@ -7,10 +7,12 @@ module.exports = {
   },
   plugins: ["@typescript-eslint/eslint-plugin", "unused-imports"],
   extends: [
+    'eslint:recommended',
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:@typescript-eslint/strict",
+    "plugin:react/jsx-runtime"
   ],
   root: true,
   env: {
@@ -25,20 +27,32 @@ module.exports = {
     "tsconfig.json",
   ],
   rules: {
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "block", "next": "return" },
+      { "blankLine": "always", "prev": "multiline-block-like", "next": "*" }
+    ],
     "prettier/prettier": [
       "error",
       {
         endOfLine: "auto",
-        semi: true,
+        semi: false,
         singleQuote: false,
-        trailingComma: "es5",
-        printWidth: 80,
+        printWidth: 100,
         tabWidth: 2,
+        trailingComma: "all",
+        parser: false,
         useTabs: false,
         bracketSpacing: true,
         jsxBracketSameLine: false,
         arrowParens: "always",
         quoteProps: "as-needed",
+        plugins: ["prettier-plugin-tailwindcss","prettier-plugin-organize-imports"],
+          fileInfoOptions: {
+            withNodeModules: true,
+            module: true,
+            exclude: ["node_modules/**", "**/__tests__/**", "**/__mocks__/**"]
+            },
       },
     ],
     "unused-imports/no-unused-imports": "error",
@@ -64,12 +78,7 @@ module.exports = {
     ],
     "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
     "@typescript-eslint/consistent-type-exports": "error",
-    "@typescript-eslint/consistent-type-imports": [
-      "error",
-      {
-        prefer: "no-type-imports",
-      },
-    ],
+    "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/explicit-member-accessibility": "error",
     "@typescript-eslint/explicit-module-boundary-types": "error",
