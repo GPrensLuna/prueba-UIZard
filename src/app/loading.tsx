@@ -1,6 +1,6 @@
 export default function Loading(): JSX.Element {
   return (
-    <div role="status">
+    <output aria-live="polite">
       <svg
         aria-hidden="true"
         className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -17,7 +17,7 @@ export default function Loading(): JSX.Element {
           fill="currentFill"
         />
       </svg>
-      <span className="sr-only">Loading...</span>
-    </div>
+      <span className="sr-only">Cargando...</span>
+    </output>
   );
 }

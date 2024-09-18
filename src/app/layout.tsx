@@ -1,74 +1,39 @@
-/* eslint-disable no-console */
+import { api } from "@/api";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
+import { ListItems } from "./(home)/components/ListItems";
+import { ListItemsLoading } from "./(home)/components/ListItemsLoading";
 import "./globals.css";
-import type { HackerNewsPost } from "./typescript";
 
 export const metadata: Metadata = {
-  title: " template ",
+  title: "template",
   description: "template",
 };
-const ListItems = async ({
-  id,
-}: {
-  id: HackerNewsPost["id"];
-}): Promise<JSX.Element> => {
-  const post = await fetch(
-    `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`,
-  ).then((res) => res.json() as Promise<HackerNewsPost>);
-  return (
-    <li className="grid h-16 gap-2 truncate">
-      <p>{post.title || post.by}</p>
-      <div className="flex justify-between items-center opacity-50">
-        <p>{post.by}</p>
-        <p>Visit website</p>
-      </div>
-    </li>
-  );
-};
-
-const ListItemsLoading = (): JSX.Element => (
-  <article className="grid h-16 items-center">
-    <section className="w-full animate-pulse" role="status">
-      <div className="h-2.5 w-full rounded-xl bg-gray-200 dark:bg-gray-700" />
-      <span className="sr-only">Loading ...</span>
-    </section>
-    <div className="flex items-center justify-between">
-      <section className="w-full animate-pulse" role="status">
-        <div className="h-2.5 w-12 rounded-xl bg-gray-200 dark:bg-gray-700" />
-        <span className="sr-only">Loading ...</span>
-      </section>
-      <section className="w-full animate-pulse" role="status">
-        <div className="h-2.5 w-full rounded-xl bg-gray-200 dark:bg-gray-700" />
-        <span className="sr-only">Loading ...</span>
-      </section>
-    </div>
-  </article>
-);
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>): Promise<React.JSX.Element> {
-  const posts: number[] = await fetch(
-    `https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty&limitToFirst=10&orderBy="$key"`,
-  ).then((res) => res.json() as Promise<number[]>);
+  const posts: number[] = await api.fetchTopPosts();
 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="grid h-screen grid-rows-[60px,1fr,60px]">
-        <header className="w-full bg-yellow-400 text-black grid place-content-center font-semibold">
-          Uizard HackerNews Reader
+        <header className="bg-yellow-400 text-black grid place-content-center font-semibold shadow-lg">
+          <h1 className="text-xl">Uizard HackerNews Reader</h1>
         </header>
-        <main className=" md:grid-cols-[350px,1fr] max-w-screen grid xl:px-40 grid-cols-1">
-          <aside>
-            <ul className=" px-4 grid gap-4">
+        <main className="grid grid-cols-[minmax(144px,384px),1fr] max-w-screen xl:px-40">
+          <aside className="bg-gray-50 border-r border-gray-200">
+            <ul className="px-4 py-2 grid gap-4">
               {posts.map((id) => (
-                <li key={id} className="">
+                <li key={id} className="max-w-sm">
                   <Suspense fallback={<ListItemsLoading />}>
-                    <Link href={`/${id}`}>
+                    <Link
+                      href={`/${id}`}
+                      className="block p-4 bg-white rounded-lg shadow hover:bg-yellow-100 transition duration-200"
+                    >
                       <ListItems id={id} />
                     </Link>
                   </Suspense>
@@ -76,7 +41,7 @@ export default async function RootLayout({
               ))}
             </ul>
           </aside>
-          <section>{children}</section>
+          <section className="p-4 bg-white">{children}</section>
         </main>
       </body>
     </html>
