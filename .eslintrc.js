@@ -7,12 +7,12 @@ module.exports = {
   },
   plugins: ["@typescript-eslint/eslint-plugin", "unused-imports"],
   extends: [
-    'eslint:recommended',
+    "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:@typescript-eslint/strict",
-    "plugin:react/jsx-runtime"
+    "plugin:react/jsx-runtime",
   ],
   root: true,
   env: {
@@ -29,8 +29,8 @@ module.exports = {
   rules: {
     "padding-line-between-statements": [
       "error",
-      { "blankLine": "always", "prev": "block", "next": "return" },
-      { "blankLine": "always", "prev": "multiline-block-like", "next": "*" }
+      { blankLine: "always", prev: "block", next: "return" },
+      { blankLine: "always", prev: "multiline-block-like", next: "*" },
     ],
     "prettier/prettier": [
       "error",
@@ -47,12 +47,15 @@ module.exports = {
         jsxBracketSameLine: false,
         arrowParens: "always",
         quoteProps: "as-needed",
-        plugins: ["prettier-plugin-tailwindcss","prettier-plugin-organize-imports"],
-          fileInfoOptions: {
-            withNodeModules: true,
-            module: true,
-            exclude: ["node_modules/**", "**/__tests__/**", "**/__mocks__/**"]
-            },
+        plugins: [
+          "prettier-plugin-tailwindcss",
+          "prettier-plugin-organize-imports",
+        ],
+        fileInfoOptions: {
+          withNodeModules: true,
+          module: true,
+          exclude: ["node_modules/**", "**/__tests__/**", "**/__mocks__/**"],
+        },
       },
     ],
     "unused-imports/no-unused-imports": "error",
@@ -108,7 +111,7 @@ module.exports = {
     "@typescript-eslint/unbound-method": ["off"],
     "@typescript-eslint/no-floating-promises": "off",
     eqeqeq: ["error", "always"],
-    "no-console": "error",
+    "no-console": "warn",
     "@typescript-eslint/unified-signatures": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [

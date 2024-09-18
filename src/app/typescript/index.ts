@@ -1,13 +1,11 @@
-export interface Book {
+export interface HackerNewsPost {
+  by: string;
+  descendants: number;
+  id: number;
+  kids?: number[];
+  score: number;
+  time: number;
   title: string;
-  pages: number;
-  genre: string;
-  cover: string;
-  synopsis: string;
-  year: number;
-  ISBN: string;
-  author: {
-    name: string;
-    otherBooks: string[];
-  };
+  type: "story";
+  url: string;
 }

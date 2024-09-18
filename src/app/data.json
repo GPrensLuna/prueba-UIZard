@@ -1,0 +1,16 @@
+{
+  "by": "HelenePhisher",
+  "descendants": 109,
+  "id": 41571862,
+  "kids": [
+    41572423, 41572180, 41572069, 41572040, 41574438, 41572099, 41572271,
+    41572318, 41572084, 41572346, 41573414, 41573991, 41573663, 41573490,
+    41573669, 41573085, 41572877, 41573821, 41573968, 41572229, 41572300,
+    41574200, 41573908, 41573312, 41573368, 41572457
+  ],
+  "score": 318,
+  "time": 1726602365,
+  "title": "macOS Sequoia 15 may bypass DNS encryption",
+  "type": "story",
+  "url": "https://www.obdev.at/blog/warning-macos-sequoia-15-may-bypass-dns-encryption/"
+}
